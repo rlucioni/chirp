@@ -11,7 +11,7 @@
 
 ;;; define the database for lobos migrations
 (def clogdb
-	(:classname   "org.postgresql.Driver"
+	(:classname "org.postgresql.Driver"
 	 :subprotocol "postgresql"
 	 :subname     "clogdb"
 	 :user        "clog"
