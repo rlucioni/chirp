@@ -11,11 +11,15 @@ authors:
       username: "anand"
       password: "bayarea"
       email:    "anand@clog.com"
+    - id: 5
+      username: "danny"
+      password: "seattle"
+      email:    "danny@clog.com"
 
 posts:
     - id: 2
       title: "Reporting from Ghana!"
-      content: "<em>Welcome to Clog, a blogging engine written in Clojure.</em> This is my first post from Ghana, where I'm helping with eye surgeries."
+      content: "Welcome to Clog, a blogging engine written in Clojure. This is my first post from Ghana, where I'm helping with eye surgeries."
       status: true
       author: 2
     - id: 3
@@ -28,3 +32,8 @@ posts:
       content: "I'm in Cambridge this summer working in a bio lab. I'll be posting updates here."
       status: true
       author: 4
+    - id: 5
+      title: "Sunny in Seattle!"
+      content: "I'm in Seattle working at a lab at the UW this summer."
+      status: true
+      author: 5
