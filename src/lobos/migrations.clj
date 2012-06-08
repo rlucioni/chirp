@@ -1,3 +1,5 @@
+;;; defines a namespace migration with one var clogdb which is a map of database
+;;; connection information
 (ns lobos.migrations
 	;;; exclude some clojure built-in symbols so we can use the lobos symbols
 	(:refer-clojure :exclude [alter drop
@@ -15,8 +17,20 @@
 	 :user        "clog"
 	 :password    "lono123"))
 
-;;; first migration to add the authors table
+;;; first migration to create the authors table
+(defmigration add-authors-table
+	;;; to be executed when migrating schema "up" using "migrate"
+	(up [] (create clogdb
+				(table :authors (integer :id :primary-key)
+					(varchar :username 100 :unique)
+					(varchar :password 100 :not-null)
+					(varchar :email    255))))
+	;;; to be executed when migrating schema "down" using "rollback"
+	(down [] (drop (table :authors))))
+
+;;; migration to create the posts table
 (defmigration add-posts-table
+	;;; to be executed when migrating schema "up" using "migrate"
 	(up [] (create clogdb
 				(table :posts (integer :id :primary-key)
 					(varchar   :title 250)
@@ -25,4 +39,5 @@
 					(timestamp :created (default (now)))
 					(timestamp :published)
 					(integer   :author [:refer :authors :id] :not-null))))
+	;;; to be executed when migrating schema "down" using "rollback"
 	(down [] (drop (table :posts))))
