@@ -11,11 +11,11 @@
 
 ;;; define the database for lobos migrations
 (def clogdb
-	(:classname "org.postgresql.Driver"
+	{:classname   "org.postgresql.Driver"
 	 :subprotocol "postgresql"
 	 :subname     "clogdb"
 	 :user        "clog"
-	 :password    "lono123"))
+	 :password    "lono123"})
 
 ;;; first migration to create the authors table
 (defmigration add-authors-table
