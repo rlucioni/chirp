@@ -11,4 +11,4 @@
 	;;; and content
 	[:div.post] (clone-for [post posts]
 				[:div.title] (content (:title post))
-				[:div.content (content (:content post))]))
+				[:div.content] (content (:content post))))
