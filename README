@@ -1,6 +1,6 @@
 # clog
 
-A blogging platform written in Clojure.
+A blogging platform backed by PostgreSQL and written in Clojure.
 
 
 ## License
