@@ -21,7 +21,8 @@
 (defmigration add-authors-table
 	;;; to be executed when migrating schema "up" using "migrate"
 	(up [] (create clogdb
-				(table :authors (integer :id :primary-key)
+				(table :authors 
+					(integer :id :primary-key)
 					(varchar :username 100 :unique)
 					(varchar :password 100 :not-null)
 					(varchar :email    255))))
@@ -32,7 +33,8 @@
 (defmigration add-posts-table
 	;;; to be executed when migrating schema "up" using "migrate"
 	(up [] (create clogdb
-				(table :posts (integer :id :primary-key)
+				(table :posts 
+					(integer   :id :primary-key)
 					(varchar   :title 250)
 					(text      :content)
 					(boolean   :status (default false))

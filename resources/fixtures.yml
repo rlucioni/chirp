@@ -13,15 +13,18 @@ authors:
       email:    "anand@clog.com"
 
 posts:
-    - title: "Reporting from Ghana!"
+    - id: 2
+      title: "Reporting from Ghana!"
       content: "<em>Welcome to Clog, a blogging engine written in Clojure.</em> This is my first post from Ghana, where I'm helping with eye surgeries."
       status: true
       author: 2
-    - title: "Hello from Cambridge!"
+    - id: 3
+      title: "Hello from Cambridge!"
       content: "This is the first of many posts I will write from Cambridge, MA, where I'm a research assistant for a professor at HBS."
       status: true
       author: 3
-    - title: "Saying hi from the lab."
+    - id: 4
+      title: "Saying hi from the lab."
       content: "I'm in Cambridge this summer working in a bio lab. I'll be posting updates here."
       status: true
       author: 4
