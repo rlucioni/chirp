@@ -1,3 +1,4 @@
+;;; define two entities, authors and posts, using Korma's defentity macro
 (ns clog.models
 	(:use korma.db
 		  korma.core))
