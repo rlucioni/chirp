@@ -1,0 +1,27 @@
+authors:
+    - id: 1
+      username: "theresa"
+      password: "ghana"
+      email:    "theresa@clog.com"
+    - id: 2
+      username: "alastair"
+      password: "singapore"
+      email:    "alastair@clog.com"
+    - id: 3
+      username: "anand"
+      password: "bayarea"
+      email:    "anand@clog.com"
+
+posts:
+    - title: "Reporting from Ghana!"
+      text: "<em>Welcome to Clog, a blogging engine written in Clojure.</em> This is my first post from Ghana, where I'm helping with eye surgeries."
+      status: true
+      author: 1
+    - title: "Hello from Cambridge!"
+      text: "This is the first of many posts I will write from Cambridge, MA, where I'm a research assistant for a professor at HBS."
+      status: true
+      author: 2
+    - title: "Saying hi from the lab."
+      text: "I'm in Cambridge this summer working in a bio lab. I'll be posting updates here."
+      status: true
+      author: 3
