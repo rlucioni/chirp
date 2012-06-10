@@ -2,6 +2,7 @@
 	(:use ring.adapter.jetty
 	      ring.middleware.resource
 	      ring.middleware.reload
+	      ring.middleware.file
 	      ring.util.response
 	      net.cgrand.moustache
 	      clog.controller))
