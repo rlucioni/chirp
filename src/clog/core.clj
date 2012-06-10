@@ -9,7 +9,7 @@
 ;;; define routes
 (def routes
 	(app
-		(wrap-file "resources/public")
+		(wrap-file "resources/public/bootstrap")
 		;;; delegate call is due to moustache syntax - function can't be used directly
 		;;; as the handler, since we want the parameters of the handler (in this case "req")
 		;;; to be passed to the function; so, delegate is used to pass the request as the
