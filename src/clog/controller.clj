@@ -63,4 +63,4 @@
 					(insert posts (values (assoc params
 											:id id
 											:author author-id)))))
-				(redirect "/")))))
+				(response (admin-page))))))
