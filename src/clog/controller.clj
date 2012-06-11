@@ -57,7 +57,7 @@
 					(insert posts (values (assoc params
 											:id id
 											:author author-id)))))
-				(response (admin-page))))))
+				(response (home-page))))))
 
 ;;; handler for logout
 (defn logout
