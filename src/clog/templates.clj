@@ -27,8 +27,8 @@
 ;;; handler for the login page - check to see if any message is passed to the 
 ;;; template method
 (deftemplate login-page "login.html" [& msg]
-	[:div#error] (if (nil? msg)
-					(set-attr :style "display:none")
-					(do->
-						(remove-attr :style)
-						(content msg))))
+  [:div#error] (if (nil? msg)
+                  (set-attr :style "display:none")
+                  (do->
+                    (remove-attr :style)
+                    (content msg))))
