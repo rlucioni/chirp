@@ -22,7 +22,7 @@
 		(->> (first (select posts (where {:id postId})))
 			post-page response)))
 
-;;; handler for the login page
+;;; CRUDE handler for the login page - just checks if username = password
 (defn login
 	"Login handler"
 	[req]
@@ -38,6 +38,29 @@
 				;;; else, check if username and password match
 				(if (= (get params "username") (get params "password"))
 					;;; if match, redirect to admin page
-				    (redirect "/admin")
+				    (assoc (redirect "/admin") :session {:username (get params "username")})
 				    ;;; no match, then render login page again and complain
 				    (response (login-page "Invalid username or password.")))))))
+
+;;; handler for the admin page
+(defn admin
+	"Admin handler"
+	[req]
+	(let [username (:username (:session req))
+		  params (:params req)]
+		(if (nil? username)
+			(redirect "/login")
+			(do
+				(if-not (empty? params)
+					(let [id (inc (count (select posts)))
+						  author-id (:id (first (select authors (fields :id) (where {:username username}))))]
+					(insert posts (values (assoc params
+											:id id
+											:author author-id)))))
+				(response (admin-page))))))
+
+;;; handler for logout
+(defn logout
+	"Logout handler"
+	[req]
+	(assoc (redirect "/") :session nil))

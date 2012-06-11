@@ -32,3 +32,6 @@
                   (do->
                     (remove-attr :style)
                     (content msg))))
+
+;;; use the admin page
+(deftemplate admin-page "admin.html" [])
