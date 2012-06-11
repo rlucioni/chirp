@@ -21,3 +21,23 @@
 	(let [postId (Integer/parseInt id)]
 		(->> (first (select posts (where {:id postId})))
 			post-page response)))
+
+;;; handler for the login page
+(defn login
+	"Login handler"
+	[req]
+	(let [params (:params req)]
+		;;; check if params are empty
+		(if (empty? params)
+			;;; if empty, render login page
+			(reponse (login-page))
+			;;; if not empty, check if username and password are blank
+			(if (= "" (get params "username") (get params "password"))
+				;;; if they're blank, render login page and complain
+				(reponse (login-page "Invalid username or password."))
+				;;; else, check if username and password match
+				(if (= (get params "username") (get params "password"))
+					;;; if match, redirect to admin page
+				    (redirect "/admin")
+				    ;;; no match, then render login page again and complain
+				    (reponse (login-page "Invalid username or password.")))))))

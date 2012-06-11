@@ -3,6 +3,7 @@
 	      ring.middleware.resource
 	      ring.middleware.reload
 	      ring.middleware.file
+	      ring.middleware.params
 	      ring.util.response
 	      net.cgrand.moustache
 	      clog.controller))
@@ -10,13 +11,19 @@
 ;;; define routes
 (def routes
 	(app
+		(wrap-params)
 		(wrap-file "resources/public")
-		;;; delegate call is due to moustache syntax - function can't be used directly
+
+		;;; delegate call below is due to moustache syntax - function can't be used directly
 		;;; as the handler, since we want the parameters of the handler (in this case "req")
 		;;; to be passed to the function; so, delegate is used to pass the request as the
 		;;; first argument
+
+		;;; route for the login page
+		["login"] (delegate login)
+		;;; route for the homepage
 		[""] (delegate index)
-		;;; handler for viewing posts
+		;;; route for viewing posts
 		[id] (delegate post id)))
 
 ;;; function for starting jetty
