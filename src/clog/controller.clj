@@ -42,6 +42,12 @@
 				    ;;; no match, then render login page again and complain
 				    (response (login-page "Invalid username or password.")))))))
 
+;;; handler for logout
+(defn logout
+	"Logout handler"
+	[req]
+	(assoc (redirect "/") :session nil))
+
 ;;; handler for the admin page
 (defn admin
 	"Admin handler"
@@ -57,10 +63,4 @@
 					(insert posts (values (assoc params
 											:id id
 											:author author-id)))))
-				(response (home-page))))))
-
-;;; handler for logout
-(defn logout
-	"Logout handler"
-	[req]
-	(assoc (redirect "/") :session nil))
+				(response (admin-page))))))
