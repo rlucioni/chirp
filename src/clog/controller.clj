@@ -12,5 +12,12 @@
 	;;; select all posts using Korma's select function, and then pass them on to
 	;;; the homepage function; the result of the home-page template function - 
 	;;; the HTML with posts populated - is passed to the Ring's response function
-
 	(->> (select posts) home-page response)) ;;; sexy way of writing (reponse (home-page (select posts)))
+
+;;; handler for the post page
+(defn post
+	"Post details page handler"
+	[req id]
+	(let [postId (Integer/parseInt id)]
+		(->> (first (select posts (where {:id postId})))
+			post-page response)))

@@ -15,7 +15,9 @@
 		;;; as the handler, since we want the parameters of the handler (in this case "req")
 		;;; to be passed to the function; so, delegate is used to pass the request as the
 		;;; first argument
-		[""] (delegate index)))
+		[""] (delegate index)
+		;;; handler for viewing posts
+		[id] (delegate post id)))
 
 ;;; function for starting jetty
 (defn start [port]
