@@ -10,8 +10,10 @@
 	;;; "clone" the div with class post and replace content of divs with classes title
 	;;; and content
 	[:div.post] (clone-for [post posts]
-				[:span.title] (content (:title post))
-				[:div.content] (content (:content post))))
+				[:a.title] (do ->
+								(set-attr :href (str "/" (:id post)))
+								(content (:title post)))
+				[:div.content] (html-content (:content post))))
 
 ;;; using the deftemplate macro to create a template function called post-page
 ;;; which takes the file post.html and transforms the file using the forms specified
