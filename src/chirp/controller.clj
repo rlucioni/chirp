@@ -67,7 +67,7 @@
 						;;; if they match, register new user and redirect to home page
 						(do
 							(insert authors (values {:id (inc (count (select authors))) :username (get params "username") :password (get params "password") :email (get params "email")}))
-				    		(assoc (redirect "/") :session {:username (get params "username")}))
+				    		(redirect "/"))
 				    	;;; else, complain and render register page
 						(response (login-page "Passwords do not match."))))))))
 
