@@ -26,6 +26,8 @@
 		["login"] (delegate login)
 		;;; route for logout
 		["logout"] (delegate logout)
+		;;; route for registration page
+		["register"] (delegate register)
 		;;; route for the admin page
 		["admin"] (delegate admin)
 		;;; route for the homepage
