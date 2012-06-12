@@ -37,7 +37,7 @@
 				;;; else, check if username and password match
 				;;; (if (= (get params "username") (get params "password"))
 
-				(if (= (select authors (where {:username (get params "username")}) (fields [:password])) (get params "password"))
+				(if (= (select authors (fields :password) (where {:username (get params "username")})) (get params "password"))
 
 					;;; if match, redirect to admin page
 				    (assoc (redirect "/admin") :session {:username (get params "username")})
