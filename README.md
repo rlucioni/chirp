@@ -18,16 +18,21 @@ chirp and your choice of password. Create a database named chirpdb and make sure
 
 Create the required schema by using Lobos. In a Clojure REPL, run
 
-	user => (use 'lobos.core 'lobos.connectivity 'lobos.migration 'lobos.migrations)
-	user => (open-global chirpdb)
-	user => (migrate)
+	user=> (use 'lobos.core 'lobos.connectivity 'lobos.migration 'lobos.migrations)
+	user=> (open-global chirpdb)
+	user=> (migrate)
 
-You can now load the included fixtures to populate the database with some initial data.
+You can now load the included fixtures to populate the database with some initial data. In the REPL, run
+
+	user=> (use 'clj-yaml.core)
+	user=> (use 'korma.db 'korma.core 'clog.models)
+	user=> (insert authors (values (:authors (parse-string (slurp "./resources/fixtures.yml")))))
+	user=> (insert posts (values (:posts (parse-string (slurp "./resources/fixtures.yml")))))
 
 Launch the app by running the following in the REPL:
 
-	user => (use 'chirp.core)
-	user => (start 8080)
+	user=> (use 'chirp.core)
+	user=> (start 8080)
 
 You can now access the app at port 8080.
 
