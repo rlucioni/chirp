@@ -57,11 +57,11 @@
 			;;; if not empty, check if username is blank
 			(if (= "" (get params "username"))
 				;;; if it's blank, render register page and complain
-				(response (login-page "Please enter a username."))
+				(response (register-page "Please enter a username."))
 				;;; else, check if password is blank
 				(if (= "" (get params "password"))
 					;;; if it's blank, render register page and complain
-					(response (login-page "Please enter a password."))
+					(response (register-page "Please enter a password."))
 					;;; else, check if given passwords match
 					(if (= (get params "password") (get params "password2"))
 						;;; if they match, register new user and redirect to home page
@@ -69,7 +69,7 @@
 							(insert authors (values {:id (inc (count (select authors))) :username (get params "username") :password (get params "password") :email (get params "email")}))
 				    		(redirect "/"))
 				    	;;; else, complain and render register page
-						(response (login-page "Passwords do not match."))))))))
+						(response (register-page "Passwords do not match."))))))))
 
 ;;; handler for logout
 (defn logout
