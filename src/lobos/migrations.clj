@@ -1,4 +1,4 @@
-;;; defines a namespace migration with one var clogdb which is a map of database
+;;; defines a namespace migration with one var chirpdb which is a map of database
 ;;; connection information
 (ns lobos.migrations
 	;;; exclude some clojure built-in symbols so we can use the lobos symbols

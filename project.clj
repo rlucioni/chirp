@@ -1,5 +1,5 @@
-(defproject clog "0.0.1-SNAPSHOT"
-  :description "Clog: a blogging engine written in Clojure"
+(defproject chirp "0.0.1-SNAPSHOT"
+  :description "Chirp: a microblogging engine written in Clojure"
   :dependencies [[org.clojure/clojure "1.3.0"]
   				 [ring "1.0.1" ;;; exclude the clojure, clj-stacktrace from ring dependency
   				 	:exclusions [org.clojure/clojure
