@@ -1,4 +1,4 @@
-(ns clog.core
+(ns chirp.core
 	(:use ring.adapter.jetty
 	      ring.middleware.resource
 	      ring.middleware.reload
@@ -8,14 +8,14 @@
 	      ring.middleware.session.cookie
 	      ring.util.response
 	      net.cgrand.moustache
-	      clog.controller))
+	      chirp.controller))
 
 ;;; define routes
 (def routes
 	(app
 		(wrap-file "resources/public")
 		(wrap-params)
-		(wrap-session {:cookie-name "clog-session" :store (cookie-store)})
+		(wrap-session {:cookie-name "chirp-session" :store (cookie-store)})
 
 		;;; delegate call below is due to moustache syntax - function can't be used directly
 		;;; as the handler, since we want the parameters of the handler (in this case "req")

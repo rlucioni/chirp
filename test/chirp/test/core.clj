@@ -1,5 +1,5 @@
-(ns clog.test.core
-  (:use [clog.core])
+(ns chirp.test.core
+  (:use [chirp.core])
   (:use [clojure.test]))
 
 (deftest replace-me ;; FIXME: write

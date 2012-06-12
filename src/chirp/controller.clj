@@ -1,7 +1,7 @@
 ;;; controller functions - connect views to requests
-(ns clog.controller
-	(:use clog.templates
-		  clog.models
+(ns chirp.controller
+	(:use chirp.templates
+		  chirp.models
 		  ring.util.response
 		  korma.core))
 

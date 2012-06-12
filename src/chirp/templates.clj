@@ -1,4 +1,4 @@
-(ns clog.templates
+(ns chirp.templates
 	(:use net.cgrand.enlive-html))
 
 ;;; using the deftemplate macro to create a template function called home-page
@@ -6,7 +6,7 @@
 (deftemplate home-page "home.html" [posts]
 	;;; form in use - find the tag :title in home.html and replace its contents with
 	;;; the specified string
-	[:title] (content "Clog - The Clojure-Powered Blogging Engine")
+	[:title] (content "Chirp - Clojure-Powered Microblogging")
 	;;; "clone" the div with class post and replace content of divs with classes title
 	;;; and content
 	[:div.post] (clone-for [post posts]
@@ -20,7 +20,7 @@
 (deftemplate post-page "post.html" [post]
 	;;; form in use - find the tag :title in post.html and replace its contents with
 	;;; the specified string
-	[:title] (content (str "Clog - " (:title post)))
+	[:title] (content (str "Chirp - " (:title post)))
 	[:span.title] (content (:title post))
 	[:div.content] (html-content (:content post)))
 
