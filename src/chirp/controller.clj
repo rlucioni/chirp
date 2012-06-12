@@ -36,9 +36,9 @@
 				;;; if they're blank, render login page and complain
 				(response (login-page "Invalid username or password."))
 				;;; else, check if username and password match
-				(if (= (get params "username") (get params "password"))
+				;;; (if (= (get params "username") (get params "password"))
 
-				;;; (if (= (select authors (fields :password) (where {:username (get params "username")})) (get params "password"))
+				(if (= (select authors (fields :password) (where {:username (get params "username")})) (get params "password"))
 
 					;;; if match, redirect to admin page
 				    (assoc (redirect "/admin") :session {:username (get params "username")})
