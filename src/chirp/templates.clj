@@ -12,7 +12,7 @@
 	[:div.post] (clone-for [post posts]
 				[:a.title] (do->
 							(set-attr :href (str "/" (:id post)))
-							(content (:author post)))
+							(content (:title post)))
 				[:b.time] (html-content (:created post))
 				[:div.content] (html-content (:content post))))
 

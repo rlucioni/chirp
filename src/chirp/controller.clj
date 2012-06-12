@@ -19,8 +19,7 @@
 	"Post details page handler"
 	[req id]
 	(let [postId (Integer/parseInt id)]
-		(->> (first (select posts (where {:id postId})))
-			post-page response)))
+		(->> (first (select posts (where {:id postId}))) post-page response)))
 
 ;;; CRUDE handler for the login page - just checks if username = password
 (defn login
