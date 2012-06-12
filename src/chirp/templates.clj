@@ -13,6 +13,7 @@
 				[:a.title] (do->
 							(set-attr :href (str "/" (:id post)))
 							(content (:title post)))
+				[:a.time] (html-content (:created post))
 				[:div.content] (html-content (:content post))))
 
 ;;; using the deftemplate macro to create a template function called post-page
