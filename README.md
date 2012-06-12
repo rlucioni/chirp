@@ -10,11 +10,11 @@ First, install Leiningen (http://bit.ly/euQG6L). Then, after cloning the reposit
 Next, install PostgreSQL for your platform (http://bit.ly/IRbjJ). Create a user with login 
 chirp and your choice of password. Create a database named chirpdb and make sure that the user has permissions on the database. You can perform this set-up by using the psql command line tool and running the following:
 
-	psql => CREATE USER chirp WITH PASSWORD 'Your_Choice_Of_Password';
+	postgres=# CREATE USER chirp WITH PASSWORD 'Your_Choice_Of_Password';
  
-	psql => CREATE DATABASE chirpdb;
+	postgres=# CREATE DATABASE chirpdb;
  
-	psql => GRANT ALL PRIVILEGES ON DATABASE chirpdb TO chirp;
+	postgres=# GRANT ALL PRIVILEGES ON DATABASE chirpdb TO chirp;
 
 Finally, create the required schema by using Lobos. In a Clojure REPL, run
 
