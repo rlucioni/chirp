@@ -3,6 +3,7 @@
 	(:use chirp.templates
 		  chirp.models
 		  ring.util.response
+		  korma.db
 		  korma.core))
 
 ;;; handler for the index page
@@ -35,14 +36,35 @@
 				;;; if they're blank, render login page and complain
 				(response (login-page "Invalid username or password."))
 				;;; else, check if username and password match
-				;;; (if (= (get params "username") (get params "password"))
+				(if (= (get params "username") (get params "password"))
 
-				(if (= (:password (select authors (fields :password) (where {:username (get params "username")}))) (get params "password"))
+				;;; (if (= (select authors (fields :password) (where {:username (get params "username")})) (get params "password"))
 
 					;;; if match, redirect to admin page
 				    (assoc (redirect "/admin") :session {:username (get params "username")})
 				    ;;; no match, then render login page again and complain
 				    (response (login-page "Invalid username or password.")))))))
+
+;;; registration handler
+; (defn register
+; 	"Registration handler"
+; 	[req]
+; 	(let [params (:params req)]
+; 		;;; check if params are empty
+; 		(if (empty? params)
+; 			;;; if empty, render login page
+; 			(response (register-page))
+; 			;;; if not empty, check if username is blank
+; 			(if (= "" (get params "username"))
+; 				;;; if it's blank, render register page and complain
+; 				(response (login-page "Please enter a username."))
+; 				;;; else, check if password is blank
+; 				(if (= "" (get params "password"))
+; 					;;; if it's blank, render register page and complain
+; 					(response (login-page "Please enter a password."))
+; 					;;; else, register new user and redirect to admin page
+; 					(insert authors (values {:id 1, :username (get params "username"), :password (get params "password"), :email (get params "email")}))
+; 				    (assoc (redirect "/admin") :session {:username (get params "username")})
 
 ;;; handler for logout
 (defn logout

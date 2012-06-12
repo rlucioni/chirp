@@ -34,5 +34,14 @@
                     (remove-attr :style)
                     (content msg))))
 
+;;; handler for the registration page - check to see if any message is passed to the 
+;;; template method
+(deftemplate register-page "register.html" [& msg]
+  [:div#error] (if (nil? msg)
+                  (set-attr :style "display:none")
+                  (do->
+                    (remove-attr :style)
+                    (content msg))))
+
 ;;; use the admin page
 (deftemplate admin-page "admin.html" [])
