@@ -64,10 +64,10 @@
 					(response (login-page "Please enter a password."))
 					;;; else, check if given passwords match
 					(if (= (get params "password") (get params "password2"))
-						;;; if they match, register new user and redirect to admin page
+						;;; if they match, register new user and redirect to home page
 						(do
-							(insert authors (values {:id (inc (count (select authors))), :username (get params "username"), :password (get params "password"), :email (get params "email")}))
-				    		(assoc (redirect "/admin") :session {:username (get params "username")}))
+							(insert authors (values {:id (inc (count (select authors))) :username (get params "username") :password (get params "password") :email (get params "email")}))
+				    		(assoc (redirect "/") :session {:username (get params "username")}))
 				    	;;; else, complain and render register page
 						(response (login-page "Passwords do not match."))))))))
 
