@@ -13,7 +13,7 @@
 				[:a.title] (do->
 							(set-attr :href (str "/" (:id post)))
 							(content (:title post)))
-				[:b.time] (html-content (:created post))
+				[:p.time] (html-content (:created post))
 				[:div.content] (html-content (:content post))))
 
 ;;; using the deftemplate macro to create a template function called post-page
@@ -23,7 +23,7 @@
 	;;; the specified string
 	[:title] (content (str "Chirp - " (:title post)))
 	[:span.title] (content (:title post))
-	[:b.time] (html-content (:created post))
+	[:p.time] (html-content (:created post))
 	[:div.content] (html-content (:content post)))
 
 ;;; handler for the login page - check to see if any message is passed to the 
