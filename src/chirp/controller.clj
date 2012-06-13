@@ -36,14 +36,19 @@
 				;;; if they're blank, render login page and complain
 				(response (login-page "Invalid username or password."))
 				;;; else, check if username and password match
-				;;; (if (= (get params "username") (get params "password"))
-
 				(if (= (:password (first (select authors (fields :password) (where {:username (get params "username")})))) (get params "password"))
-
 					;;; if match, redirect to admin page
 				    (assoc (redirect "/admin") :session {:username (get params "username")})
 				    ;;; no match, then render login page again and complain
 				    (response (login-page "Invalid username or password.")))))))
+
+;;; utility function for checking if a sequence contains a given item
+(defn seq-contains?
+  "Determine whether a sequence contains a given item"
+  [sequence item]
+  (if (empty? sequence)
+    false
+    (reduce #(or %1 %2) (map #(= %1 item) sequence))))
 
 ;;; registration handler
 (defn register
@@ -58,18 +63,22 @@
 			(if (= "" (get params "username"))
 				;;; if it's blank, render register page and complain
 				(response (register-page "Please enter a username."))
-				;;; else, check if password is blank
-				(if (= "" (get params "password"))
-					;;; if it's blank, render register page and complain
-					(response (register-page "Please enter a password."))
-					;;; else, check if given passwords match
-					(if (= (get params "password") (get params "password2"))
-						;;; if they match, register new user and redirect to home page
-						(do
-							(insert authors (values {:id (inc (count (select authors))) :username (get params "username") :password (get params "password") :email (get params "email")}))
-				    		(redirect "/"))
-				    	;;; else, complain and render register page
-						(response (register-page "Passwords do not match."))))))))
+				;;; else, check if username is unique
+				(if (seq-contains? (select authors (fields :username)) {:username (get params "username")})
+					;;; if it's taken, render register page and complain
+					(response (register-page "The username you entered is taken. Please try another."))
+					;;; else, check if password is blank
+					(if (= "" (get params "password"))
+						;;; if it's blank, render register page and complain
+						(response (register-page "Please enter a password."))
+						;;; else, check if given passwords match
+						(if (= (get params "password") (get params "password2"))
+							;;; if they match, register new user and redirect to home page
+							(do
+								(insert authors (values {:id (inc (count (select authors))) :username (get params "username") :password (get params "password") :email (get params "email")}))
+					    		(redirect "/"))
+					    	;;; else, complain and render register page
+							(response (register-page "Passwords do not match.")))))))))
 
 ;;; handler for logout
 (defn logout
