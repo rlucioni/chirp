@@ -14,10 +14,16 @@
  
 <div class="navbar navbar-fixed-top">
     <div class="navbar-inner">
-        <div class="container">
-            <span><a class="brand"><b>Chirp - Clojure-Powered Microblogging</b></a></span>
-            <span class="pull-right"><a class="btn btn-info" href="/register">Register</a></span>
-            <span class="pull-right"><a class="btn" href="/">Homepage</a></span>
+        <div class="container-fluid">
+            <span><a class="brand" href="/"><b>Chirp</b></a></span>
+            <div class="nav-collapse">  
+                <ul class="nav">  
+                    <li><a href="/">Home</a></li>  
+                    <li><a href="/admin">Post</a></li>  
+                    <li><a href="/register">Register</a></li>  
+                </ul>
+                <p class="navbar-text pull-right">Logged in as <b>username</b></p>
+          </div> <!--/.nav-collapse -->  
         </div>
     </div>
 </div>
