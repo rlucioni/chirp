@@ -15,18 +15,33 @@
  
 <div class="navbar navbar-fixed-top">
     <div class="navbar-inner">
-        <div class="container">
-            <span><a class="brand"><b>Chirp - Clojure-Powered Microblogging</b></a></span>
-            <span class="pull-right"><a class="btn btn-info" href="/register">Register</a></span>
-            <span class="pull-right"><a class="btn" href="/admin">Post</a></span>
+        <div class="container-fluid">
+            <span><a class="brand" href="/"><b>Chirp - Clojure-Powered Microblogging</b></a></span>
+            <div class="nav-collapse">  
+                <ul class="nav">  
+                    <li class="active"><a href="/">Home</a></li>  
+                    <li><a href="/admin">Post</a></li>  
+                    <li><a href="/register">Register</a></li>  
+                </ul>
+                <p class="navbar-text pull-right">Logged in as <b>username</b></p>
+          </div> <!--/.nav-collapse -->  
         </div>
     </div>
 </div>
-<div class="container">
-    <div class="post row">
-        <div class="page-header"><h3><a class="title">Post Title (should become author)</a></h3></div>
-        <div class="pull-right"><b class="time">Submission Time</b></div>
-        <div class="content">Post Content</div>
+<div class="container-fluid">
+    <div class="post row-fluid">
+        <div class="span2">
+            <div class="well sidebar-nav">  
+                <ul class="nav nav-list">  
+                    <li class="nav-header">Welcome!</li> 
+                </ul>
+            </div>
+        </div>
+        <div class="span10">
+            <div class="page-header"><h3><a class="title">Post Title (should become author)</a></h3></div>
+            <div class="pull-right"><b class="time">Submission Time</b></div>
+            <div class="content">Post Content</div>
+        </div>
     </div>
 </div>
 </body>
