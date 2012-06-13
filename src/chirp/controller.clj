@@ -78,7 +78,7 @@
 								(insert authors (values {:id (inc (count (select authors))) :username (get params "username") :password (get params "password") :email (get params "email")}))
 					    		(redirect "/"))
 					    	;;; else, complain and render register page
-							(response (register-page "Passwords do not match.")))))))))
+							(response (register-page "The passwords you entered do not match. Please try again.")))))))))
 
 ;;; handler for logout
 (defn logout
