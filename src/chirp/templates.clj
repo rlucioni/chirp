@@ -21,10 +21,12 @@
 
 ;;; using the deftemplate macro to create a template function called profile-page
 ;;; which takes the file profile.html and transforms the file using the forms specified
-(deftemplate profile-page "profile.html" [posts]
+(deftemplate profile-page "profile.html" [posts & msg]
 	;;; form in use - find the tag :title in profile.html and replace its contents with
 	;;; the specified string
 	[:title] (content (str "Chirp - " (:author (first posts)) "'s Posts"))
+	;;; show if the current user is logged in or not, and if so, as who
+	[:b.status] (content msg)
 	;;; "clone" the div with class post and replace content of divs with classes title
 	;;; and content
 	[:div.post] (clone-for [post posts]
@@ -37,10 +39,13 @@
 
 ;;; using the deftemplate macro to create a template function called post-page
 ;;; which takes the file post.html and transforms the file using the forms specified
-(deftemplate post-page "post.html" [post]
+(deftemplate post-page "post.html" [post & msg]
 	;;; form in use - find the tag :title in post.html and replace its contents with
 	;;; the specified string
 	[:title] (content (str "Chirp - " (:title post)))
+	;;; show if the current user is logged in or not, and if so, as who
+	[:b.status] (content msg)
+	;;; replace other relevant portions of the page
 	[:span.title] (content (:title post))
 	[:b.author] (html-content (:author post))
 	[:b.time] (html-content (:created post))
@@ -66,4 +71,5 @@
 
 ;;; use the admin page
 (deftemplate admin-page "admin.html" [& msg]
-	[:b.status] (content msg))
+	;;; show if the current user is logged in or not, and if so, as who
+	[:b.status] (content msg)

@@ -30,15 +30,19 @@
 		;;; select all posts belonging to the logged in user using Korma's select function, and then
 		;;; pass them on to the profile page function; the result of the profile page function - 
 		;;; the HTML with posts populated - is passes to Ring's response function
-		(->> (select posts (order :created :DESC) (where {:author username})) profile-page response))))
+		(response (profile-page (select posts (order :created :DESC) (where {:author username})) (str "Logged in as " username))))))
 			
 
 ;;; handler for the post page
 (defn post
 	"Post details page handler"
 	[req id]
-	(let [postId (Integer/parseInt id)]
-		(->> (first (select posts (where {:id postId}))) post-page response)))
+	(let [postId   (Integer/parseInt id)
+		  username (:username (:session req))
+	      params   (:params req)]
+	      (if (nil? username)
+			(response (post-page (select posts (where {:id postId})) "Not logged in"))
+			(response (post-page (select posts (where {:id postId})) (str "Logged in as " username))))))
 
 ;;; CRUDE handler for the login page - just checks if username = password
 (defn login
