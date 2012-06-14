@@ -19,10 +19,10 @@
 
 ;;; using the deftemplate macro to create a template function called profile-page
 ;;; which takes the file profile.html and transforms the file using the forms specified
-(deftemplate home-page "home.html" [posts]
-	;;; form in use - find the tag :title in home.html and replace its contents with
+(deftemplate profile-page "profile.html" [posts]
+	;;; form in use - find the tag :title in profile.html and replace its contents with
 	;;; the specified string
-	[:title] (content (str :author "'s Posts"))
+	[:title] [post posts] (content (str :author "'s Posts"))
 	;;; "clone" the div with class post and replace content of divs with classes title
 	;;; and content
 	[:div.post] (clone-for [post posts]
