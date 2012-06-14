@@ -90,8 +90,7 @@
 							;;; if they match, register new user and redirect to home page
 							(do
 								(insert authors (values {:id (inc (count (select authors))) :username (get params "username") :password (get params "password") :email (get params "email")}))
-					    		;;; (redirect "/"))
-								(assoc (redirect "/admin") :session {:username (get params "username")}))
+					    		(redirect "/"))
 					    	;;; else, complain and render register page
 							(response (register-page "The passwords you entered do not match. Please try again.")))))))))
 
