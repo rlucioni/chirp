@@ -17,6 +17,22 @@
 				[:b.time] (html-content (:created post))
 				[:div.content] (html-content (:content post))))
 
+;;; using the deftemplate macro to create a template function called profile-page
+;;; which takes the file profile.html and transforms the file using the forms specified
+(deftemplate home-page "home.html" [posts]
+	;;; form in use - find the tag :title in home.html and replace its contents with
+	;;; the specified string
+	[:title] (content (str :author "'s Posts"))
+	;;; "clone" the div with class post and replace content of divs with classes title
+	;;; and content
+	[:div.post] (clone-for [post posts]
+				[:a.title] (do->
+							(set-attr :href (str "/" (:id post)))
+							(content (:title post)))
+				[:b.author] (html-content (:author post))
+				[:b.time] (html-content (:created post))
+				[:div.content] (html-content (:content post))))
+
 ;;; using the deftemplate macro to create a template function called post-page
 ;;; which takes the file post.html and transforms the file using the forms specified
 (deftemplate post-page "post.html" [post]

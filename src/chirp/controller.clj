@@ -12,8 +12,17 @@
 	[req]
 	;;; select all posts using Korma's select function, and then pass them on to
 	;;; the homepage function; the result of the home-page template function - 
-	;;; the HTML with posts populated - is passed to the Ring's response function
+	;;; the HTML with posts populated - is passed to Ring's response function
 	(->> (select posts (order :created :DESC)) home-page response)) ;;; sexy way of writing (response (home-page (select posts)))
+
+;;; handler for the index page
+(defn profile
+	"Profile page handler"
+	[req]
+	;;; select all posts belonging to the logged in user using Korma's select function, and then
+	;;; pass them on to the profile page function; the result of the profile page function - 
+	;;; the HTML with posts populated - is passes to Ring's response function
+	(->> (select posts (order :created :DESC) (where {:username "renzo"})) profile-page response))
 
 ;;; handler for the post page
 (defn post

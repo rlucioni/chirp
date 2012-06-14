@@ -30,6 +30,8 @@
 		["register"] (delegate register)
 		;;; route for the admin page
 		["admin"] (delegate admin)
+		;;; route for profile page
+		["profile"] (delegate profile)
 		;;; route for the homepage
 		[""] (delegate index)
 		;;; route for viewing posts
