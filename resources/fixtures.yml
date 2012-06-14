@@ -25,24 +25,24 @@ posts:
       title: "Hello from La Jolla"
       content: "Welcome to Chirp, a microblogging engine written in Clojure. This is my first post from the LonoCloud offices in La Jolla, where I'm developing this app."
       status: true
-      author: 1
+      author: renzo
     - id: 2
       title: "Reporting from Ghana"
       content: "Hi! I'm in Ghana, where I'm helping with eye surgeries."
       status: true
-      author: 2
+      author: theresa
     - id: 3
       title: "Cambridge for the summer"
       content: "This is the first of many posts I will write from Cambridge, MA, where I'm a research assistant for a professor at HBS."
       status: true
-      author: 3
+      author: alastair
     - id: 4
       title: "In the lab"
       content: "I'm in Cambridge this summer working in a bio lab. I'll be posting updates here."
       status: true
-      author: 4
+      author: anand
     - id: 5
       title: "Sunny in Seattle"
       content: "I'm in Seattle working at a lab at the UW this summer."
       status: true
-      author: 5
+      author: danny
