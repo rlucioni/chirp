@@ -8,10 +8,7 @@
 	;;; the specified string
 	[:title] (content "Chirp - Clojure-Powered Microblogging")
 	;;; show if the current user is logged in or not, and if so, as who
-	;;; [:b.status] (content msg)
-	(if (= "Not logged in" msg)
-		([:p.status] (content msg))
-		([:b.username] (content msg)))
+	[:b.status] (content msg)
 	;;; "clone" the div with class post and replace content of divs with classes title
 	;;; and content
 	[:div.post] (clone-for [post posts]
@@ -68,4 +65,5 @@
                     (content msg))))
 
 ;;; use the admin page
-(deftemplate admin-page "admin.html" [])
+(deftemplate admin-page "admin.html" [& msg]
+	[:b.status] (content msg))
