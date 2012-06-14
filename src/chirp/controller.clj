@@ -19,10 +19,15 @@
 (defn profile
 	"Profile page handler"
 	[req]
-	;;; select all posts belonging to the logged in user using Korma's select function, and then
-	;;; pass them on to the profile page function; the result of the profile page function - 
-	;;; the HTML with posts populated - is passes to Ring's response function
-	(->> (select posts (order :created :DESC) (where {:author "renzo"})) profile-page response))
+	(let [username (:username (:session req))
+	      params   (:params req)]
+	(if (nil? username)
+		(redirect "/login")
+		;;; select all posts belonging to the logged in user using Korma's select function, and then
+		;;; pass them on to the profile page function; the result of the profile page function - 
+		;;; the HTML with posts populated - is passes to Ring's response function
+		(->> (select posts (order :created :DESC) (where {:author username})) profile-page response))
+			
 
 ;;; handler for the post page
 (defn post
@@ -100,7 +105,7 @@
 	"Admin handler"
 	[req]
 	(let [username (:username (:session req))
-		  params (:params req)]
+		  params   (:params req)]
 		(if (nil? username)
 			(redirect "/login")
 			(do
