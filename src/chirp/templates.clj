@@ -13,8 +13,8 @@
 				[:a.title] (do->
 							(set-attr :href (str "/" (:id post)))
 							(content (:title post)))
-				[:p.author] (html-content (:author post))
-				[:p.time] (html-content (:created post))
+				[:b.author] (html-content (:author post))
+				[:b.time] (html-content (:created post))
 				[:div.content] (html-content (:content post))))
 
 ;;; using the deftemplate macro to create a template function called post-page
