@@ -48,9 +48,12 @@
 (defn login
 	"Login handler"
 	[req]
-	(let [params (:params req)]
-		;;; check if params are empty
-		(if (empty? params)
+	(let [username (:username (:session req))
+		  params (:params req)]
+		;;; make sure user isn't already logged in
+		(if (nil? username)
+			;;; if user is not logged in, check if params are empty
+			(if (empty? params)
 			;;; if empty, render login page
 			(response (login-page))
 			;;; if not empty, check if username and password are blank
@@ -62,7 +65,9 @@
 					;;; if match, redirect to admin page
 				    (assoc (redirect "/admin") :session {:username (get params "username")})
 				    ;;; no match, then render login page again and complain
-				    (response (login-page "Invalid username or password.")))))))
+				    (response (login-page "Invalid username or password.")))))
+			;;; if user is already logged in, render login page and complain
+			(response (login-page "You are already logged in. To log in as a different user, please log out of the current account.")))))
 
 ;;; utility function for checking if a sequence contains a given item
 (defn seq-contains?
