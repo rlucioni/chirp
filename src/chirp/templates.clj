@@ -72,4 +72,4 @@
 ;;; use the admin page
 (deftemplate admin-page "admin.html" [& msg]
 	;;; show if the current user is logged in or not, and if so, as who
-	[:b.status] (content msg)
+	[:b.status] (content msg))
