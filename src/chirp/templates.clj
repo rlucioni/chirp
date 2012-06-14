@@ -13,7 +13,7 @@
 				[:a.title] (do->
 							(set-attr :href (str "/" (:id post)))
 							(content (:title post)))
-				[:div.author] (html-content (:author post))
+				[:p.author] (html-content (:author post))
 				[:p.time] (html-content (:created post))
 				[:div.content] (html-content (:content post))))
 
