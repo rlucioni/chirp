@@ -67,7 +67,7 @@
 				    ;;; no match, then render login page again and complain
 				    (response (login-page "Invalid username or password.")))))
 			;;; if user is already logged in, render login page and complain
-			(response (login-page "You are already logged in. To log in as a different user, please log out of the current account.")))))
+			(response (login-page (str "You are already logged in as " username ". To log in as a different user, please log out of the current account."))))))
 
 ;;; utility function for checking if a sequence contains a given item
 (defn seq-contains?
@@ -104,7 +104,7 @@
 							(do
 								(insert authors (values {:id (inc (count (select authors))) :username (get params "username") :password (get params "password") :email (get params "email")}))
 					    		;;; (redirect "/login"))
-								(response (login-page "Registration successful. Please log in.")))
+								(assoc (response (login-page "Registration successful. Please log in.")) :session nil)
 					    	;;; else, complain and render register page
 							(response (register-page "The passwords you entered do not match. Please try again.")))))))))
 
