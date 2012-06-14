@@ -22,7 +22,7 @@
 (deftemplate profile-page "profile.html" [posts]
 	;;; form in use - find the tag :title in profile.html and replace its contents with
 	;;; the specified string
-	[:title] [post posts] (content (str :author "'s Posts"))
+	[:title] (content (str "Chirp - " (:author (first posts)) "'s Posts"))
 	;;; "clone" the div with class post and replace content of divs with classes title
 	;;; and content
 	[:div.post] (clone-for [post posts]
