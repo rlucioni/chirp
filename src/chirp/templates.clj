@@ -3,12 +3,12 @@
 
 ;;; using the deftemplate macro to create a template function called home-page
 ;;; which takes the file home.html and transforms the file using the forms specified
-(deftemplate home-page "home.html" [posts username]
+(deftemplate home-page "home.html" [posts]
 	;;; form in use - find the tag :title in home.html and replace its contents with
 	;;; the specified string
 	[:title] (content "Chirp - Clojure-Powered Microblogging")
 	;;; show who the current user is logged in as
-	[:b.username] (content username)
+	;;; [:b.username] (content username)
 	;;; "clone" the div with class post and replace content of divs with classes title
 	;;; and content
 	[:div.post] (clone-for [post posts]

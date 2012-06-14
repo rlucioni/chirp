@@ -10,13 +10,10 @@
 (defn index
 	"Index page handler"
 	[req]
-	(let [username (:username (:session req))
-	      params   (:params req)]
 	;;; select all posts using Korma's select function, and then pass them on to
 	;;; the homepage function; the result of the home-page template function - 
 	;;; the HTML with posts populated - is passed to Ring's response function
-	;;; (->> (select posts (order :created :DESC)) home-page response)) ;;; sexy way of writing (response (home-page (select posts)))
-	(response (home-page ((select posts (order :created :DESC)) (username))))))
+	(->> (select posts (order :created :DESC)) home-page response)) ;;; sexy way of writing (response (home-page (select posts)))
 
 ;;; handler for the index page
 (defn profile
@@ -93,7 +90,8 @@
 							;;; if they match, register new user and redirect to home page
 							(do
 								(insert authors (values {:id (inc (count (select authors))) :username (get params "username") :password (get params "password") :email (get params "email")}))
-					    		(redirect "/"))
+					    		;;; (redirect "/login"))
+								(response (login-page "Registration successful. Please log in.")))
 					    	;;; else, complain and render register page
 							(response (register-page "The passwords you entered do not match. Please try again.")))))))))
 
