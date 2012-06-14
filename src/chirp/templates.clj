@@ -24,8 +24,8 @@
 	;;; the specified string
 	[:title] (content (str "Chirp - " (:title post)))
 	[:span.title] (content (:title post))
-	[:div.author] (html-content (:author post))
-	[:p.time] (html-content (:created post))
+	[:b.author] (html-content (:author post))
+	[:b.time] (html-content (:created post))
 	[:div.content] (html-content (:content post)))
 
 ;;; handler for the login page - check to see if any message is passed to the 
