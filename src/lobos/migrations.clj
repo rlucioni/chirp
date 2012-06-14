@@ -40,6 +40,6 @@
 					(boolean   :status (default false))
 					(timestamp :created (default (now)))
 					(timestamp :published)
-					(integer   :author [:refer :authors :id] :not-null))))
+					(varchar   :author [:refer :authors :username] :not-null))))
 	;;; to be executed when migrating schema "down" using "rollback"
 	(down [] (drop (table :posts))))
