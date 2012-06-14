@@ -16,7 +16,7 @@
 	;;; the homepage function; the result of the home-page template function - 
 	;;; the HTML with posts populated - is passed to Ring's response function
 	;;; (->> (select posts (order :created :DESC)) home-page response)) ;;; sexy way of writing (response (home-page (select posts)))
-	(response (home-page (select posts (order :created :DESC)) (username)))))
+	(response (home-page ((select posts (order :created :DESC)) (username))))))
 
 ;;; handler for the index page
 (defn profile
