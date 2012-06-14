@@ -96,9 +96,9 @@
 			(redirect "/login")
 			(do
 				(if-not (empty? params)
-					(let [id (inc (count (select posts)))
-						  author-id (:id (first (select authors (fields :id) (where {:username username}))))]
+					(let [id (inc (count (select posts)))]
+						  ;;; author-id (:id (first (select authors (fields :id) (where {:username username}))))]
 					(insert posts (values (assoc params
 											:id id
-											:author author-id)))))
+											:author username)))))
 				(response (admin-page))))))
