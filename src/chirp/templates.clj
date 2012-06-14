@@ -7,6 +7,8 @@
 	;;; form in use - find the tag :title in home.html and replace its contents with
 	;;; the specified string
 	[:title] (content "Chirp - Clojure-Powered Microblogging")
+	;;; show who the current user is logged in as
+	[:b.username] (content (:username (:session req)))
 	;;; "clone" the div with class post and replace content of divs with classes title
 	;;; and content
 	[:div.post] (clone-for [post posts]
