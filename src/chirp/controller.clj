@@ -14,7 +14,8 @@
 	      params   (:params req)]
 	(if (nil? username)
 		(response (home-page (select posts (order :created :DESC)) "Not logged in"))
-		(response (home-page (select posts (order :created :DESC)) (str "Logged in as " username))))))
+		(response (home-page (select posts (order :created :DESC)) username)))))
+;;; (str "Logged in as " username)
 
 	;;; select all posts using Korma's select function, and then pass them on to
 	;;; the homepage function; the result of the home-page template function - 
