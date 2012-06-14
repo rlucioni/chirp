@@ -41,8 +41,8 @@
 		  username (:username (:session req))
 	      params   (:params req)]
 	      (if (nil? username)
-			(response (post-page (select posts (where {:id postId})) "Not logged in"))
-			(response (post-page (select posts (where {:id postId})) (str "Logged in as " username))))))
+			(response (post-page (first (select posts (where {:id postId}))) "Not logged in"))
+			(response (post-page (first (select posts (where {:id postId}))) (str "Logged in as " username))))))
 
 ;;; CRUDE handler for the login page - just checks if username = password
 (defn login
