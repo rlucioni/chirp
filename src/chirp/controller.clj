@@ -104,7 +104,7 @@
 							(do
 								(insert authors (values {:id (inc (count (select authors))) :username (get params "username") :password (get params "password") :email (get params "email")}))
 					    		;;; (redirect "/login"))
-								(assoc (response (login-page "Registration successful. Please log in.")) :session nil)
+								(assoc (response (login-page "Registration successful. Please log in.")) :session nil))
 					    	;;; else, complain and render register page
 							(response (register-page "The passwords you entered do not match. Please try again.")))))))))
 
