@@ -24,6 +24,9 @@
 (deftemplate profile-page "profile.html" [posts & msg]
 	;;; form in use - find the tag :title in profile.html and replace its contents with
 	;;; the specified string
+
+	;;; NOTE: currently puts parens and quotes around the name in the title
+
 	[:title] (content (str "Chirp -" msg "'s Posts"))
 	;;; show if the current user is logged in or not, and if so, as who
 	[:b.username] (content msg)
