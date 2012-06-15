@@ -67,7 +67,7 @@
 				    ;;; no match, then render login page again and complain
 				    (response (login-page "Invalid username or password.")))))
 			;;; if user is already logged in, render login page and complain
-			(response (login-page (str "You are already logged in as " username ". To log in as a different user, please log out of the current account."))))))
+			(response (login-page (str "You are already logged in as " username ". To log in as a different user, please log out of the current account by going to your Profile page."))))))
 
 ;;; utility function for checking if a sequence contains a given item
 (defn seq-contains?
