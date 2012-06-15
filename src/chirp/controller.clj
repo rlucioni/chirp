@@ -30,7 +30,7 @@
 		;;; select all posts belonging to the logged in user using Korma's select function, and then
 		;;; pass them on to the profile page function; the result of the profile page function - 
 		;;; the HTML with posts populated - is passes to Ring's response function
-		(response (profile-page (select posts (order :created :DESC) (where {:author username})) (str "Logged in as " username))))))
+		(response (profile-page (select posts (order :created :DESC) (where {:author username})) username)))))
 			
 
 ;;; handler for the post page

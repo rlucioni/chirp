@@ -24,9 +24,9 @@
 (deftemplate profile-page "profile.html" [posts & msg]
 	;;; form in use - find the tag :title in profile.html and replace its contents with
 	;;; the specified string
-	[:title] (content (str "Chirp - " (:author (first posts)) "'s Posts"))
+	[:title] (content (str "Chirp - " msg "'s Posts"))
 	;;; show if the current user is logged in or not, and if so, as who
-	[:b.status] (content msg)
+	[:b.username] (content msg)
 	;;; "clone" the div with class post and replace content of divs with classes title
 	;;; and content
 	[:div.post] (clone-for [post posts]
