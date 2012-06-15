@@ -27,7 +27,7 @@
 
 	;;; NOTE: currently puts parens and quotes around the name in the title
 
-	[:title] (content (str "Chirp -" msg "'s Posts"))
+	[:title] (content (str "Chirp - " (content msg) "'s Posts"))
 	;;; show if the current user is logged in or not, and if so, as who
 	[:b.username] (content msg)
 	;;; "clone" the div with class post and replace content of divs with classes title
