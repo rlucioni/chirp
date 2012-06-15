@@ -22,8 +22,10 @@
 		;;; to be passed to the function; so, delegate is used to pass the request as the
 		;;; first argument
 
-		;;; route for the login page
-		["login"] (delegate login)
+		;;; route for the login-profile page
+		["login-profile"] (delegate login-profile)
+		;;; route for the login-admin page
+		["login-admin"] (delegate login-admin)
 		;;; route for logout
 		["logout"] (delegate logout)
 		;;; route for registration page

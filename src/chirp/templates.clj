@@ -24,7 +24,7 @@
 (deftemplate profile-page "profile.html" [posts & msg]
 	;;; form in use - find the tag :title in profile.html and replace its contents with
 	;;; the specified string
-	[:title] (str "Chirp - " (content msg))
+	[:title] (content msg)
 	;;; show if the current user is logged in or not, and if so, as who
 	[:b.username] (content msg)
 	;;; "clone" the div with class post and replace content of divs with classes title
@@ -51,9 +51,18 @@
 	[:b.time] (html-content (:created post))
 	[:div.content] (html-content (:content post)))
 
-;;; handler for the login page - check to see if any message is passed to the 
-;;; template method
-(deftemplate login-page "login.html" [& msg]
+;;; handler for the login page in front of the admin page - check to see if any message 
+;;; is passed to the template method
+(deftemplate login-admin-page "login-admin.html" [& msg]
+  [:div#error] (if (nil? msg)
+                  (set-attr :style "display:none")
+                  (do->
+                    (remove-attr :style)
+                    (content msg))))
+
+;;; handler for the login page in front of the profile page - check to see if any message 
+;;; is passed to the template method
+(deftemplate login-profile-page "login-profile.html" [& msg]
   [:div#error] (if (nil? msg)
                   (set-attr :style "display:none")
                   (do->

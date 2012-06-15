@@ -26,7 +26,7 @@
 	(let [username (:username (:session req))
 	      params   (:params req)]
 	(if (nil? username)
-		(redirect "/login")
+		(response (login-profile-page "Please log in to view your profile."))
 		;;; select all posts belonging to the logged in user using Korma's select function, and then
 		;;; pass them on to the profile page function; the result of the profile page function - 
 		;;; the HTML with posts populated - is passed to Ring's response function
@@ -44,9 +44,9 @@
 			(response (post-page (first (select posts (where {:id postId}))) "Not logged in"))
 			(response (post-page (first (select posts (where {:id postId}))) (str "Logged in as " username))))))
 
-;;; CRUDE handler for the login page - just checks if username = password
-(defn login
-	"Login handler"
+;; login handler - receieves logins redirecting to admin page
+(defn login-admin
+	"Login-admin handler"
 	[req]
 	(let [username (:username (:session req))
 		  params (:params req)]
@@ -54,20 +54,46 @@
 		(if (nil? username)
 			;;; if user is not logged in, check if params are empty
 			(if (empty? params)
-			;;; if empty, render login page
-			(response (login-page))
+			;;; if empty, render login-admin page
+			(response (login-admin-page))
 			;;; if not empty, check if username and password are blank
 			(if (= "" (get params "username") (get params "password"))
-				;;; if they're blank, render login page and complain
-				(response (login-page "Invalid username or password."))
+				;;; if they're blank, render login-admin page and complain
+				(response (login-admin-page "Invalid username or password."))
 				;;; else, check if username and password match
 				(if (= (:password (first (select authors (fields :password) (where {:username (get params "username")})))) (get params "password"))
 					;;; if match, redirect to admin page
 				    (assoc (redirect "/admin") :session {:username (get params "username")})
-				    ;;; no match, then render login page again and complain
-				    (response (login-page "Invalid username or password.")))))
+				    ;;; no match, then render login-admin page again and complain
+				    (response (login-admin-page "Invalid username or password.")))))
+			;;; if user is already logged in, render login-admin page and complain
+			(response (login-admin-page (str "You are already logged in as " username ". To log in as a different user, please log out of the current account by going to your Profile page."))))))
+
+;; login handler - receieves logins redirecting to profile page
+(defn login-profile
+	"Login-profile handler"
+	[req]
+	(let [username (:username (:session req))
+		  params (:params req)]
+		;;; make sure user isn't already logged in
+		(if (nil? username)
+			;;; if user is not logged in, check if params are empty
+			(if (empty? params)
+			;;; if empty, render login-profile page
+			(response (login-profile-page))
+			;;; if not empty, check if username and password are blank
+			(if (= "" (get params "username") (get params "password"))
+				;;; if they're blank, render login-profile page and complain
+				(response (login-profile-page "Invalid username or password."))
+				;;; else, check if username and password match
+				(if (= (:password (first (select authors (fields :password) (where {:username (get params "username")})))) (get params "password"))
+					;;; if match, redirect to admin page
+				    (assoc (redirect "/profile") :session {:username (get params "username")})
+				    ;;; no match, then render login-profile page again and complain
+				    (response (login-profile-page "Invalid username or password.")))))
 			;;; if user is already logged in, render login page and complain
-			(response (login-page (str "You are already logged in as " username ". To log in as a different user, please log out of the current account by going to your Profile page."))))))
+			(response (login-profile-page (str "You are already logged in as " username ". To log in as a different user, please log out of the current account by going to your Profile page."))))))
+
 
 ;;; utility function for checking if a sequence contains a given item
 (defn seq-contains?
@@ -84,7 +110,7 @@
 	(let [params (:params req)]
 		;;; check if params are empty
 		(if (empty? params)
-			;;; if empty, render login page
+			;;; if empty, render regustration page
 			(response (register-page))
 			;;; if not empty, check if username is blank
 			(if (= "" (get params "username"))
@@ -103,8 +129,7 @@
 							;;; if they match, register new user and redirect to home page
 							(do
 								(insert authors (values {:id (inc (count (select authors))) :username (get params "username") :password (get params "password") :email (get params "email")}))
-					    		;;; (redirect "/login"))
-								(assoc (response (login-page "Registration successful. Please log in.")) :session nil))
+								(assoc (response (login-admin-page "Registration successful. Please log in.")) :session nil))
 					    	;;; else, complain and render register page
 							(response (register-page "The passwords you entered do not match. Please try again.")))))))))
 
@@ -121,7 +146,7 @@
 	(let [username (:username (:session req))
 		  params   (:params req)]
 		(if (nil? username)
-			(redirect "/login")
+			(response (login-admin-page "Please log in to post."))
 			(do
 				(if-not (empty? params)
 					(let [id (inc (count (select posts)))]
