@@ -1,0 +1,1 @@
+web: lein trampoline run -m chirp.core
