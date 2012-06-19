@@ -13,9 +13,10 @@
 (def chirpdb
 	{:classname   "org.postgresql.Driver"
 	 :subprotocol "postgresql"
-	 :subname     "chirpdb"
-	 :user        "chirp"
-	 :password    "lono123"})
+	 :subname     "dfyohnwqis" ;;;"chirpdb"
+	 :user        "dfyohnwqis" ;;;"chirp"
+	 :password    "Z4vPDD5H0TiKhY69DyTd" ;;;"lono123"
+	 })
 
 ;;; first migration to create the authors table
 (defmigration add-authors-table
