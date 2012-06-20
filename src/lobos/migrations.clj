@@ -21,7 +21,7 @@
 ;;; first migration to create the authors table
 (defmigration add-authors-table
 	;;; to be executed when migrating schema "up" using "migrate"
-	(up [] (create chirpdb
+	(up [] (create
 				(table :authors 
 					(integer :id :primary-key)
 					(varchar :username 100 :unique)
@@ -33,7 +33,7 @@
 ;;; migration to create the posts table
 (defmigration add-posts-table
 	;;; to be executed when migrating schema "up" using "migrate"
-	(up [] (create chirpdb
+	(up [] (create
 				(table :posts 
 					(integer   :id :primary-key)
 					(varchar   :title 250)
