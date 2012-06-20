@@ -1,15 +1,6 @@
-;;; define two entities, authors and posts, using Korma's defentity macro
-(ns chirp.models
-	(:use korma.db
-		  korma.core))
-
-; (defdb chirpdb
-; 	{:classname   "org.postgresql.Driver"
-; 	 :subprotocol "postgresql"
-; 	 :subname     "qmqhhfanll" ;;; "chirpdb"
-; 	 :user        "qmqhhfanll" ;;; "chirp"
-; 	 :password    "WrScztZeVktVZjE4rkpt" ;;; "lono123"
-; 	 })
+(ns lobos.config
+  (:require [clojure.string :as str] lobos.connectivity)
+  (:import (java.net URI)))
 
 (defn heroku-db
   "Generate the db map according to Heroku environment when available."
@@ -30,6 +21,3 @@
           :subprotocol "postgresql"
           :subname     "//localhost:8080/chirp"}
           (heroku-db)))
-
-(defentity authors)
-(defentity posts)
