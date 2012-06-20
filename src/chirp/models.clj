@@ -2,7 +2,9 @@
 (ns chirp.models
 	(:use korma.db
 		  korma.core)
+	(:require [clojure.string :as str])
 	(:import (java.net URI)))
+
 
 ; (defdb chirpdb
 ; 	{:classname   "org.postgresql.Driver"
