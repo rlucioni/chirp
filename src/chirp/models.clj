@@ -1,7 +1,8 @@
 ;;; define two entities, authors and posts, using Korma's defentity macro
 (ns chirp.models
 	(:use korma.db
-		  korma.core))
+		  korma.core)
+	(:import (java.net URI))))
 
 ; (defdb chirpdb
 ; 	{:classname   "org.postgresql.Driver"
