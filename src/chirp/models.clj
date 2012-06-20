@@ -2,7 +2,7 @@
 (ns chirp.models
 	(:use korma.db
 		  korma.core)
-	(:import (java.net URI))))
+	(:import (java.net URI)))
 
 ; (defdb chirpdb
 ; 	{:classname   "org.postgresql.Driver"
