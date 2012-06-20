@@ -25,7 +25,7 @@
          {:user (first (str/split user-info #":"))
           :password (second (str/split user-info #":"))})))))
 
-(def chirpdb
+(defdb chirpdb
   (merge {:classname   "org.postgresql.Driver"
           :subprotocol "postgresql"
           :subname     "//localhost:8080/chirp"}
