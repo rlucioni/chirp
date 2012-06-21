@@ -9,7 +9,7 @@ Before you begin, make sure you have a Heroku account, have installed the Heroku
 
 First, create the app on Heroku’s Cedar stack by running
 
-	$ heroku create --stack cedar
+	$ heroku create
 
 (Formerly, this step was <pre>$ heroku create --stack cedar</pre>, but the Cedar stack has since become the default runtime stack on Heroku.)
 
