@@ -9,14 +9,14 @@
 		   core
 		   schema)))
 
-; ;;; define the database for lobos migrations
-; (def chirpdb
-; 	{:classname   "org.postgresql.Driver"
-; 	 :subprotocol "postgresql"
-; 	 :subname     "qmqhhfanll" ;;; "chirpdb"
-; 	 :user        "qmqhhfanll" ;;; "chirp"
-; 	 :password    "WrScztZeVktVZjE4rkpt" ;;; "lono123"
-; 	 })
+;;; define the database for lobos migrations
+(def chirpdb
+	{:classname   "org.postgresql.Driver"
+	 :subprotocol "postgresql"
+	 :subname     "chirpdb"
+	 :user        "chirp"
+	 :password    "lono123"
+	 })
 
 ;;; first migration to create the authors table
 (defmigration add-authors-table
