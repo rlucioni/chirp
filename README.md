@@ -1,6 +1,6 @@
 # Chirp
 
-A microblogging platform written in Clojure and backed by PostgreSQL.
+A microblogging platform written in Clojure and backed by PostgreSQL. This branch is configured for deployment locally or on Amazon EC2.
 
 
 ## Configuration
