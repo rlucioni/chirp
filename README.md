@@ -1,6 +1,6 @@
 # Chirp
 
-A microblogging platform written in Clojure and backed by PostgreSQL. This branch is configured for deployment on Amazon's Elastic Beanstalk.
+A microblogging platform written in Clojure and backed by MySQL. This branch is configured for deployment on Amazon's Elastic Beanstalk.
 
 
 ## Configuration
