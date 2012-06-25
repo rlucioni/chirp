@@ -28,10 +28,9 @@ N.B. You can use the (rollback) command to rollback the schema by one migration.
 
 With the schema migrated, you can now load the included fixtures to populate the database with some initial data. In the REPL, run
 
-	user=> (use 'clj-yaml.core)
 	user=> (use 'korma.db 'korma.core 'chirp.models)
-	user=> (insert authors (values (:authors (parse-string (slurp "./resources/fixtures.yml")))))
-	user=> (insert posts (values (:posts (parse-string (slurp "./resources/fixtures.yml")))))
+	user=> (insert authors (values (:authors (read-string (slurp "./resources/fixtures.clj")))))
+	user=> (insert posts (values (:posts (read-string (slurp "./resources/fixtures.clj")))))
 
 Launch the app by running the following in the REPL:
 
