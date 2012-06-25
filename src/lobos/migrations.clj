@@ -6,8 +6,14 @@
                             bigint boolean char double float time])
   ;; use only defmigration macro from lobos
   (:use (lobos [migration :only [defmigration]]
-               core
-               schema)))
+               [core :only (create drop)]
+               [schema :only (boolean
+                              default
+                              integer
+                              table
+                              text
+                              timestamp
+                              varchar)])))
 
 ;; define the database for lobos migrations
 (def chirpdb

@@ -1,14 +1,18 @@
 (ns chirp.core
-  (:use ring.adapter.jetty
-        ring.middleware.resource
-        ring.middleware.reload
-        ring.middleware.file
-        ring.middleware.params
-        ring.middleware.session
-        ring.middleware.session.cookie
-        ring.util.response
-        net.cgrand.moustache
-        chirp.controller))
+  (:use [ring.adapter.jetty :only (run-jetty)]
+        [ring.middleware.file :only (wrap-file)]
+        [ring.middleware.params :only (wrap-params)]
+        [ring.middleware.session :only (wrap-session)]
+        [ring.middleware.session.cookie :only (cookie-store)]
+        [net.cgrand.moustache :only (app delegate)]
+        [chirp.controller :only (admin
+                                 index
+                                 login-admin
+                                 login-profile
+                                 logout
+                                 post
+                                 profile
+                                 register)]))
 
 ;; define routes
 (def routes

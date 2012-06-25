@@ -1,7 +1,7 @@
 ;; define two entities, authors and posts, using Korma's defentity macro
 (ns chirp.models
-  (:use korma.db
-        korma.core))
+  (:use [korma.db :only (defdb)]
+        [korma.core :only (defentity)]))
 
 
 (defdb chirpdb

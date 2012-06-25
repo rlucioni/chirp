@@ -1,10 +1,15 @@
 ;; controller functions - connect views to requests
 (ns chirp.controller
-  (:use chirp.templates
-        chirp.models
-        ring.util.response
-        korma.db
-        korma.core))
+  (:use [chirp.templates :only (admin-page
+                                home-page
+                                login-admin-page
+                                login-profile-page
+                                post-page
+                                profile-page
+                                register-page)]
+        [chirp.models :only (authors posts)]
+        [ring.util.response :only (redirect response)]
+        [korma.core :only (fields insert order select values where)]))
 
 ;; handler for the index page
 (defn index

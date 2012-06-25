@@ -1,5 +1,11 @@
 (ns chirp.templates
-  (:use net.cgrand.enlive-html))
+  (:use [net.cgrand.enlive-html :only (clone-for
+                                       content
+                                       deftemplate
+                                       do->
+                                       html-content
+                                       remove-attr
+                                       set-attr)]))
 
 ;; using the deftemplate macro to create a template function called home-page
 ;; which takes the file home.html and transforms the file using the forms specified
