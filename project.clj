@@ -1,4 +1,4 @@
-(defproject chirp "0.0.1-SNAPSHOT"
+(defproject chirp-application "0.0.1-SNAPSHOT"
   :description "Chirp: a microblogging engine written in Clojure"
   :dependencies [[org.clojure/clojure "1.3.0"]
                  [ring "1.0.1"]

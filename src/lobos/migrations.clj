@@ -49,3 +49,31 @@
                  (varchar   :author 100 [:refer :authors :username] :not-null))))
   ;; to be executed when migrating schema "down" using "rollback"
   (down [] (drop (table :posts))))
+
+;; alternatively
+; ;; first migration to create the authors table
+; (defmigration add-authors-table
+;   ;; to be executed when migrating schema "up" using "migrate"
+;   (up [] (create
+;           (table :authors
+;                  (integer :id :unique)
+;                  (varchar :username 100 :primary-key)
+;                  (varchar :password 100 :not-null)
+;                  (varchar :email    255))))
+;   ;; to be executed when migrating schema "down" using "rollback"
+;   (down [] (drop (table :authors))))
+
+; ;; migration to create the posts table
+; (defmigration add-posts-table
+;   ;; to be executed when migrating schema "up" using "migrate"
+;   (up [] (create
+;           (table :posts
+;                  (integer   :id :primary-key)
+;                  (varchar   :title 250)
+;                  (text      :content)
+;                  (boolean   :status (default false))
+;                  (timestamp :created (default (now)))
+;                  (timestamp :published)
+;                  (varchar   :author 100 [:refer :authors :username]))))
+;   ;; to be executed when migrating schema "down" using "rollback"
+;   (down [] (drop (table :posts))))
