@@ -1,7 +1,7 @@
 (ns chirp.core
   (:use [ring.adapter.jetty :only (run-jetty)]
-        [ring.middleware.file :only (wrap-file)]
         [ring.middleware.params :only (wrap-params)]
+        [ring.middleware.resource :only (wrap-resource)]
         [ring.middleware.session :only (wrap-session)]
         [ring.middleware.session.cookie :only (cookie-store)]
         [net.cgrand.moustache :only (app delegate)]
@@ -17,7 +17,7 @@
 ;; define routes
 (def routes
   (app
-   (wrap-file "resources/public")
+   (wrap-resource "public")
    (wrap-params)
    (wrap-session {:cookie-name "chirp-session" :store (cookie-store)})
 
