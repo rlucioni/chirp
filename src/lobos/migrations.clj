@@ -16,14 +16,6 @@
                               varchar)]))
   (:require [clojure.java.jdbc :as sql]))
 
-;; define the database for lobos migrations
-(def chirpdb
-  {:classname   "com.mysql.jdbc.Driver"
-   :subprotocol "mysql"
-   :subname     "//chirpdbinstance.cvnjt4wjg36t.us-east-1.rds.amazonaws.com:3306/chirpdb"
-   :user        "chirpuser"
-   :password    "lono1234"})
-
 ;; first migration to create the authors table
 (defmigration add-authors-table
   ;; to be executed when migrating schema "up" using "migrate"
@@ -77,3 +69,12 @@
 ;                  (varchar   :author 100 [:refer :authors :username]))))
 ;   ;; to be executed when migrating schema "down" using "rollback"
 ;   (down [] (drop (table :posts))))
+
+(comment
+  (use 'chirp.db.config
+       '[lobos.connectivity :only (open-global)]
+       '[lobos.core :only (migrate rollback)])
+
+  (open-global connection)
+  (migrate)
+  )

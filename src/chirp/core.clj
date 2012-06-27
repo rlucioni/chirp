@@ -14,9 +14,19 @@
                                  profile
                                  register)]))
 
+;; from http://mmcgrana.github.com/2010/07/develop-deploy-clojure-web-applications.html
+(defn wrap-bounce-favicon [handler]
+  (fn [req]
+    (if (= [:get "/favicon.ico"] [(:request-method req) (:uri req)])
+      {:status 404
+       :headers {}
+       :body ""}
+            (handler req))))
+
 ;; define routes
 (def routes
   (app
+   (wrap-bounce-favicon)
    (wrap-resource "public")
    (wrap-params)
    (wrap-session {:cookie-name "chirp-session" :store (cookie-store)})
