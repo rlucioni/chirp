@@ -1,5 +1,6 @@
 ;; controller functions - connect views to requests
 (ns chirp.controller
+  (:require [chirp.models.in-memory :as model])
   (:use [chirp.templates :only (admin-page
                                 home-page
                                 login-admin-page
@@ -7,9 +8,7 @@
                                 post-page
                                 profile-page
                                 register-page)]
-        [chirp.models :only (authors posts)]
-        [ring.util.response :only (content-type redirect response)]
-        [korma.core :only (fields insert order select values where)]))
+        [ring.util.response :only (content-type redirect response)]))
 
 (defn- html-response
   "ring.util.response/response with a content-type of text/html"
@@ -26,8 +25,8 @@
       ;; select all posts using Korma's select function, and then pass them on to
       ;; the home-page function along with a status message; the result of the home-page
       ;; template function - the HTML with posts populated - is passed to Ring's response function
-      (html-response (home-page (select posts (order :created :DESC)) "Not logged in"))
-      (html-response (home-page (select posts (order :created :DESC)) (str "Logged in as " username))))))
+      (html-response (home-page (model/posts) "Not logged in"))
+      (html-response (home-page (model/posts) (str "Logged in as " username))))))
 
 ;; handler for the index page
 (defn profile
@@ -40,7 +39,7 @@
       ;; select all posts belonging to the logged in user using Korma's select function, and then
       ;; pass them on to the profile page function; the result of the profile page function -
       ;; the HTML with posts populated - is passed to Ring's response function
-      (html-response (profile-page (select posts (order :created :DESC) (where {:author username})) username)))))
+      (html-response (profile-page (model/posts username) username)))))
 
 
 ;; handler for the post page
@@ -51,8 +50,8 @@
         username (:username (:session req))
         params   (:params req)]
     (if (nil? username)
-      (html-response (post-page (first (select posts (where {:id postId}))) "Not logged in"))
-      (html-response (post-page (first (select posts (where {:id postId}))) (str "Logged in as " username))))))
+      (html-response (post-page (model/post postId) "Not logged in"))
+      (html-response (post-page (model/post postId) (str "Logged in as " username))))))
 
 ;; login handler - receieves logins redirecting to admin page
 (defn login-admin
@@ -71,7 +70,7 @@
           ;; if they're blank, render login-admin page and complain
           (html-response (login-admin-page "Invalid username or password."))
           ;; else, check if username and password match
-          (if (= (:password (first (select authors (fields :password) (where {:username (get params "username")})))) (get params "password"))
+          (if (= (:password (model/author (get params "username"))) (get params "password"))
             ;; if match, redirect to admin page
             (assoc (redirect "/admin") :session {:username (get params "username")})
             ;; no match, then render login-admin page again and complain
@@ -96,7 +95,7 @@
           ;; if they're blank, render login-profile page and complain
           (html-response (login-profile-page "Invalid username or password."))
           ;; else, check if username and password match
-          (if (= (:password (first (select authors (fields :password) (where {:username (get params "username")})))) (get params "password"))
+          (if (= (:password (model/author username)) (get params "password"))
             ;; if match, redirect to admin page
             (assoc (redirect "/profile") :session {:username (get params "username")})
             ;; no match, then render login-profile page again and complain
@@ -127,7 +126,7 @@
         ;; if it's blank, render register page and complain
         (html-response (register-page "Please enter a username."))
         ;; else, check if username is unique
-        (if (seq-contains? (select authors (fields :username)) {:username (get params "username")})
+        (if (model/author-exists? (get params "username"))
           ;; if it's taken, render register page and complain
           (html-response (register-page "The username you entered is taken. Please try another."))
           ;; else, check if password is blank
@@ -138,7 +137,9 @@
             (if (= (get params "password") (get params "password2"))
               ;; if they match, register new user and redirect to home page
               (do
-                (insert authors (values {:id (inc (count (select authors))) :username (get params "username") :password (get params "password") :email (get params "email")}))
+                (model/add-author (get params "username")
+                                  (get params "password")
+                                  (get params "email"))
                 (assoc (html-response (login-admin-page "Registration successful. Please log in.")) :session nil))
               ;; else, complain and render register page
               (html-response (register-page "The passwords you entered do not match. Please try again.")))))))))
@@ -159,9 +160,5 @@
       (html-response (login-admin-page "Please log in to post."))
       (do
         (if-not (empty? params)
-          (let [id (inc (count (select posts)))]
-            ;; author-id (:id (first (select authors (fields :id) (where {:username username}))))]
-            (insert posts (values (assoc params
-                                    :id id
-                                    :author username)))))
+          (model/add-post (assoc params :author username)))
         (html-response (admin-page (str "Logged in as " username)))))))
