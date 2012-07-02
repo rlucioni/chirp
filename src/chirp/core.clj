@@ -1,4 +1,5 @@
 (ns chirp.core
+  (:require [clojure.pprint :as pprint])
   (:use [ring.adapter.jetty :only (run-jetty)]
         [ring.middleware.keyword-params :only (wrap-keyword-params)]
         [ring.middleware.params :only (wrap-params)]
@@ -14,6 +15,11 @@
                                  post
                                  profile
                                  register)]))
+
+(defn wrap-logger [handler]
+  (fn [req]
+    (pprint/pprint req)
+    (handler req)))
 
 ;; from http://mmcgrana.github.com/2010/07/develop-deploy-clojure-web-applications.html
 (defn wrap-bounce-favicon [handler]
@@ -32,6 +38,7 @@
    (wrap-params)
    (wrap-keyword-params)
    (wrap-session {:cookie-name "chirp-session" :store (cookie-store)})
+   (wrap-logger)
 
    ;; delegate call below is due to moustache syntax - function can't be used directly
    ;; as the handler, since we want the parameters of the handler (in this case "req")
