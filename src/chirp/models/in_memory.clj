@@ -24,20 +24,14 @@
     (throw (Exception. (str "Key " (pr-str key) " already exists in map.")))
     (assoc map key val)))
 
-(defn add-author [username password email]
+(defn add-author [author]
   (dosync
-   (alter authors-store assoc-unless-exists username
-          {:username username
-           :password password
-           :email email})))
-
-(defn- keywordize [m]
-  (into {}
-        (map (fn [[k v]] [(keyword k) v]) m)))
+   (alter authors-store
+          assoc-unless-exists (:username author) author)))
 
 (defn add-post [post]
   (dosync
    (alter posts-store
           (fn [posts]
             (let [id (count posts)]
-              (conj posts (assoc (keywordize post) :id id)))))))
+              (conj posts (assoc post :id id)))))))

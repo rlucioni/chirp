@@ -1,5 +1,6 @@
 (ns chirp.core
   (:use [ring.adapter.jetty :only (run-jetty)]
+        [ring.middleware.keyword-params :only (wrap-keyword-params)]
         [ring.middleware.params :only (wrap-params)]
         [ring.middleware.resource :only (wrap-resource)]
         [ring.middleware.session :only (wrap-session)]
@@ -29,6 +30,7 @@
    (wrap-bounce-favicon)
    (wrap-resource "public")
    (wrap-params)
+   (wrap-keyword-params)
    (wrap-session {:cookie-name "chirp-session" :store (cookie-store)})
 
    ;; delegate call below is due to moustache syntax - function can't be used directly
