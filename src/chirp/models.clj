@@ -1,11 +1,18 @@
-;; define two entities, authors and posts, using Korma's defentity macro
-(ns chirp.models
-  (:use [korma.db :only (defdb)]
-        [korma.core :only (defentity)])
-  (:require [chirp.db.config :as config]
-            [clojure.java.jdbc :as sql]))
+(ns chirp.models)
 
-(defdb chirpdb config/connection)
+(def ^:dynamic *backend* nil)
 
-(defentity authors)
-(defentity posts)
+(defn get-backend [& args] *backend*)
+
+(defn set-backend! [ns]
+  (alter-var-root #'*backend* (fn [_] ns)))
+
+;; posts
+(defmulti add-post get-backend)
+(defmulti post get-backend)
+(defmulti posts get-backend)
+
+;; authors
+(defmulti add-author get-backend)
+(defmulti author get-backend)
+(defmulti author-exists? get-backend)
