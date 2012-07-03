@@ -1,7 +1,8 @@
 ;; controller functions - connect views to requests
 (ns chirp.controller
   (:require [chirp.models :as model]
-            [chirp.models.in-memory :as in-mem])
+            [chirp.models.in-memory :as in-mem]
+            [chirp.models.sql :as sql])
   (:use [chirp.templates :only (admin-page
                                 home-page
                                 login-admin-page
@@ -11,7 +12,8 @@
                                 register-page)]
         [ring.util.response :only (content-type redirect response)]))
 
-(in-mem/use-in-memory-backend!)
+;; (in-mem/use-in-memory-backend!)
+(sql/use-sql-backend!)
 
 (defn- html-response
   "ring.util.response/response with a content-type of text/html"
