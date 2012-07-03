@@ -7,6 +7,7 @@
                  [korma "0.2.1"]
                  [enlive "1.0.0"]
                  [org.clojure/java.jdbc "0.0.6"]
-                 [mysql/mysql-connector-java "5.1.6"]]
+                 [mysql/mysql-connector-java "5.1.6"]
+                 [postgresql "9.1-901.jdbc4"]]
   :plugins [[lein-beanstalk "0.2.2"]]
   :ring {:handler chirp.core/routes})
